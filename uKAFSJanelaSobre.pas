@@ -5,7 +5,7 @@ interface
 uses
   System.Classes, System.UITypes,
   FMX.Layouts,
-  UntKAFSJanelaModal;
+  uKAFSJanelaModal;
 
 type
   TKAFSJanelaSobre = class(TKAFSJanelaModal)
