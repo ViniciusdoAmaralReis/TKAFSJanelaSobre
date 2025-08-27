@@ -9,7 +9,7 @@ uses
 
 type
   TKAFSJanelaSobre = class(TKAFSJanelaModal)
-    ScbCorpo: TScrollBox;
+    scrollCorpo: TScrollBox;
 
     constructor Create(AOwner: TComponent); override;
     procedure KAFSJanelaSobreConfig(const _cortema1, _cortema2: TAlphaColor);
@@ -31,7 +31,7 @@ begin
   KAFSJanelaModalConfig(_cortema1, _cortema2, 'Sobre', 'ℹ️', '');
 
   // Associa procedures aos botões
-  BtnVoltar.OnClick := Retornar;
+  btnVoltar.btnBotao.OnClick := Retornar;
 
   TThread.Synchronize(nil, procedure begin Visible := True; end);
 end;
