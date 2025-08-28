@@ -11,7 +11,7 @@ type
   TKAFSJanelaSobre = class(TKAFSJanelaModal)
     scrollCorpo: TScrollBox;
 
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); reintroduce;
     procedure KAFSJanelaSobreConfig(const _cortema1, _cortema2: TAlphaColor);
     procedure Retornar(Sender: TObject);
     destructor Destroy; override;
