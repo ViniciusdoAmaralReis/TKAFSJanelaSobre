@@ -4,15 +4,15 @@ interface
 
 uses
   System.Classes, System.UITypes,
-  FMX.Layouts,
+  FMX.Graphics, FMX.Layouts,
   uKAFSJanelaModal;
 
 type
   TKAFSJanelaSobre = class(TKAFSJanelaModal)
-    scrollCorpo: TScrollBox;
+    sclCorpo: TScrollBox;
 
     constructor Create(AOwner: TComponent); reintroduce;
-    procedure KAFSJanelaSobreConfig(const _cortema1, _cortema2: TAlphaColor);
+    procedure KAFSJanelaSobreConfig(const _cortema1, _cortema2: TAlphaColor; const _imgLogoSobre: TBitmap);
     procedure Retornar(Sender: TObject);
     destructor Destroy; override;
   end;
@@ -21,24 +21,29 @@ implementation
 
 constructor TKAFSJanelaSobre.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  TThread.Synchronize(nil, procedure
+  begin
+    inherited Create(AOwner);
 
+  end);
 end;
 
-procedure TKAFSJanelaSobre.KAFSJanelaSobreConfig(const _cortema1, _cortema2: TAlphaColor);
+procedure TKAFSJanelaSobre.KAFSJanelaSobreConfig(const _cortema1, _cortema2: TAlphaColor; const _imgLogoSobre: TBitmap);
 begin
-  // Configura propriedades da tela padrão
-  KAFSJanelaModalConfig(_cortema1, _cortema2, 'Sobre', 'ℹ️', '');
+  KAFSJanelaModalConfig(_cortema1, _cortema2, _imgLogoSobre, 'Sobre', '');
 
-  // Associa procedures aos botões
-  btnVoltar.btnBotao.OnClick := Retornar;
+  TThread.Synchronize(nil, procedure
+  begin
+    // Configura componentes
+    btnVoltar.btnBotao.OnClick := Retornar;
 
-  TThread.Synchronize(nil, procedure begin Visible := True; end);
+    Self.Visible := True;
+  end);
 end;
 
 procedure TKAFSJanelaSobre.Retornar(Sender: TObject);
 begin
-  Free;
+  Self.Free;
 end;
 
 destructor TKAFSJanelaSobre.Destroy;
